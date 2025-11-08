@@ -11,9 +11,10 @@ import { getFreeTestAttempts, incrementFreeTestAttempts } from "@/lib/storage"
 
 interface FreeTestExamProps {
   questions: Question[]
+  examNumber?: number // Added optional exam number prop
 }
 
-export default function FreeTestExam({ questions }: FreeTestExamProps) {
+export default function FreeTestExam({ questions, examNumber }: FreeTestExamProps) {
   const router = useRouter()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({})
@@ -101,7 +102,9 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
     return (
       <div className="min-h-screen bg-zinc-900 flex items-center justify-center p-4">
         <Card className="max-w-2xl w-full p-8 bg-zinc-950 border-zinc-800">
-          <h1 className="text-3xl font-bold mb-6 text-center text-white">Teste Grátis</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center text-white">
+            {examNumber ? `Exame ${examNumber} - Teste Grátis` : "Teste Grátis"}
+          </h1>
 
           <div className="space-y-4 mb-8">
             <div className="flex items-start gap-3 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
@@ -129,6 +132,8 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 <li>25 questões de múltipla escolha</li>
                 <li>Tempo limite: 30 minutos</li>
                 <li>O teste terminará automaticamente quando o tempo acabar</li>
+                <li>As perguntas são sempre aleatórias</li>
+                <li>Cada vez que fizer o teste, receberá um exame diferente</li>
                 <li>Responda todas as questões</li>
                 <li>Clique em TERMINAR para ver os resultados</li>
               </ul>

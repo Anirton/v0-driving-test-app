@@ -2,6 +2,7 @@ import type { UserProgress, TestResult } from "./types"
 
 const STORAGE_KEY = "driving-test-progress"
 const FREE_TEST_ATTEMPTS_KEY = "free-test-attempts"
+const FREE_TEST_RESULTS_KEY = "free-test-results" // Added key for free test results tracking
 
 export function getUserProgress(): UserProgress {
   if (typeof window === "undefined") {
@@ -103,4 +104,15 @@ export function incrementFreeTestAttempts(): number {
 export function resetFreeTestAttempts(): void {
   if (typeof window === "undefined") return
   localStorage.removeItem(FREE_TEST_ATTEMPTS_KEY)
+}
+
+export function hasFreeTestResults(): boolean {
+  if (typeof window === "undefined") return false
+  return sessionStorage.getItem("freeTestResults") !== null
+}
+
+export function getFreeTestResults(): any {
+  if (typeof window === "undefined") return null
+  const stored = sessionStorage.getItem("freeTestResults")
+  return stored ? JSON.parse(stored) : null
 }
