@@ -1,5 +1,3 @@
-"use client"
-import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -7,21 +5,13 @@ import { CategoryBadge } from "@/components/category-badge"
 import { categoryNames } from "@/lib/constants"
 import type { QuestionCategory } from "@/lib/types"
 import PracticeCategoryClient from "@/components/practice-category-client"
+import { getQuestionsByCategory } from "@/lib/questions-db"
 
 export default async function CategoryPracticePage({ params }: { params: Promise<{ category: string }> }) {
   const resolvedParams = await params
   const category = resolvedParams.category as QuestionCategory
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/questions/category/${category}`,
-    { cache: "no-store" },
-  )
-
-  if (!response.ok) {
-    notFound()
-  }
-
-  const questions = await response.json()
+  const questions = getQuestionsByCategory(category)
 
   if (!questions.length) {
     return (
