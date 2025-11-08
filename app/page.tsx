@@ -25,21 +25,24 @@ export default function HomePage() {
     document.body.appendChild(script)
 
     script.onload = () => {
-      if (window._wq) {
-        window._wq.push({
-          id: "ril5ozivno",
-          options: {
-            controlsVisibleOnLoad: false,
-            playbar: false,
-            playButton: true,
-            smallPlayButton: false,
-            volumeControl: false,
-            fullscreenButton: false,
-            settingsControl: false,
-            qualityControl: false,
-          },
-        })
-      }
+      setTimeout(() => {
+        if (window._wq) {
+          window._wq.push({
+            id: "ril5ozivno",
+            options: {
+              autoPlay: true,
+              controlsVisibleOnLoad: false,
+              playbar: false,
+              playButton: true,
+              smallPlayButton: false,
+              volumeControl: false,
+              fullscreenButton: false,
+              settingsControl: false,
+              qualityControl: false,
+            },
+          })
+        }
+      }, 3000)
     }
 
     return () => {
