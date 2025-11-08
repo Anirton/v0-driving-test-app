@@ -17,6 +17,17 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://fast.wistia.com/assets/external/E-v1.js"
+    script.async = true
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
   // </CHANGE>
 
   return (
@@ -83,16 +94,39 @@ export default function HomePage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 p-4 md:p-6">
-            <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-              <div className="text-center space-y-4">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-green-600 flex items-center justify-center mx-auto">
-                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+            <div className="wistia_responsive_padding" style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+              <div
+                className="wistia_responsive_wrapper"
+                style={{ height: "100%", left: 0, position: "absolute", top: 0, width: "100%" }}
+              >
+                <div
+                  className="wistia_embed wistia_async_ril5ozivno seo=true videoFoam=false"
+                  style={{ height: "100%", position: "relative", width: "100%" }}
+                >
+                  <div
+                    className="wistia_swatch"
+                    style={{
+                      height: "100%",
+                      left: 0,
+                      opacity: 0,
+                      overflow: "hidden",
+                      position: "absolute",
+                      top: 0,
+                      transition: "opacity 200ms",
+                      width: "100%",
+                    }}
+                  >
+                    <img
+                      src="https://fast.wistia.com/embed/medias/ril5ozivno/swatch"
+                      style={{ filter: "blur(5px)", height: "100%", objectFit: "contain", width: "100%" }}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </div>
                 </div>
-                <p className="text-xs md:text-sm text-muted-foreground">Vídeo de apresentação</p>
               </div>
             </div>
+            {/* </CHANGE> */}
             <div className="text-center">
               <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 w-full md:w-auto">
                 <Link href="/pricing">Começar Agora</Link>
