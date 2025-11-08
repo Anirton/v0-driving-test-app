@@ -30,7 +30,7 @@ export default function PricingPage() {
 
             <div className="mb-6">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold">99 MT</span>
+                <span className="text-4xl font-bold">199 MT</span>
                 <span className="text-muted-foreground">/semana</span>
               </div>
               <p className="text-sm text-muted-foreground mt-2">Acesso completo por 7 dias</p>
@@ -81,10 +81,10 @@ export default function PricingPage() {
 
             <div className="mb-6">
               <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold">299 MT</span>
+                <span className="text-4xl font-bold">350 MT</span>
                 <span className="text-muted-foreground">/mês</span>
               </div>
-              <p className="text-sm text-green-600 font-medium mt-2">Economize 25% vs. semanal</p>
+              <p className="text-sm text-green-600 font-medium mt-2">Economize 26% vs. semanal</p>
             </div>
 
             <ul className="space-y-3 mb-8">

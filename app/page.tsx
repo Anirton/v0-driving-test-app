@@ -12,7 +12,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative w-12 h-12">
-                <Image src="https://i.ibb.co/207vc0M1/logo.png" alt="Logo" fill className="object-contain" priority />
+                <Image src="https://ibb.co/JwLw6fVw" alt="Logo" fill className="object-contain" priority />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-balance">Teste de Condução</h1>
@@ -128,7 +128,8 @@ export default function HomePage() {
                   Plano Semanal
                 </CardTitle>
                 <div className="flex items-baseline gap-2 pt-2">
-                  <span className="text-3xl font-bold">99 MT</span>
+                  {/* Updated price for weekly plan */}
+                  <span className="text-3xl font-bold">199 MT</span>
                   <span className="text-muted-foreground">/semana</span>
                 </div>
               </CardHeader>
@@ -194,10 +195,11 @@ export default function HomePage() {
                   Plano Mensal
                 </CardTitle>
                 <div className="flex items-baseline gap-2 pt-2">
-                  <span className="text-3xl font-bold">299 MT</span>
+                  {/* Updated price for monthly plan */}
+                  <span className="text-3xl font-bold">350 MT</span>
                   <span className="text-muted-foreground">/mês</span>
                 </div>
-                <p className="text-sm text-green-600 font-medium">Economize 25%</p>
+                <p className="text-sm text-green-600 font-medium">Economize 26%</p>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 mb-4">
