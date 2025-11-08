@@ -12,7 +12,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="relative w-10 h-10 md:w-12 md:h-12">
-                <Image src="https://ibb.co/SDPq9Pyfª alt="Logo" fill className="object-contain" priority />
+                <Image src="https://ibb.co/SDPq9Pyf "="Logo" fill className="object-contain" priority />
               </div>
               <div className="min-w-0">
                 <h1 className="text-base md:text-xl font-bold text-balance line-clamp-1">Teste de Condução</h1>
