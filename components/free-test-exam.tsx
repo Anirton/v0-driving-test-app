@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import type { Question } from "@/lib/types"
 import Link from "next/link"
+import Image from "next/image"
 import { getFreeTestAttempts, incrementFreeTestAttempts } from "@/lib/storage"
 
 interface FreeTestExamProps {
@@ -174,6 +175,22 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
 
   return (
     <div className="min-h-screen bg-zinc-900 py-8">
+      <div className="hidden">
+        {questions.map((q, idx) =>
+          q.imagePath ? (
+            <Image
+              key={q.id}
+              src={q.imagePath || "/placeholder.svg"}
+              alt=""
+              width={300}
+              height={300}
+              priority={idx < 5}
+              loading={idx < 5 ? "eager" : "lazy"}
+            />
+          ) : null,
+        )}
+      </div>
+
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-zinc-950 p-1 rounded-lg shadow-2xl border-2 border-zinc-800">
           <div className="bg-zinc-900 rounded-lg overflow-hidden">
@@ -200,14 +217,16 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
             {/* Question Content */}
             <div className="p-3 md:p-6">
               <div className="flex flex-col md:flex-row gap-3 md:gap-6 mb-4 md:mb-6">
-                {/* Image on the left */}
                 {currentQuestion.imagePath && (
                   <div className="flex-shrink-0">
-                    <div className="w-full md:w-48 h-32 md:h-32 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
-                      <img
+                    <div className="relative w-full md:w-48 h-32 md:h-32 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
+                      <Image
                         src={currentQuestion.imagePath || "/placeholder.svg"}
-                        alt="Question"
-                        className="w-full h-full object-cover"
+                        alt="Question image"
+                        fill
+                        className="object-cover"
+                        priority
+                        sizes="(max-width: 768px) 100vw, 192px"
                       />
                     </div>
                   </div>
@@ -218,6 +237,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 </div>
               </div>
 
+              {/* Options */}
               <div className="space-y-2 md:space-y-3">
                 {optionsArray.map((option) => {
                   const isSelected = userAnswer === option.letter
