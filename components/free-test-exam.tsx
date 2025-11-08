@@ -178,29 +178,32 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
         <div className="bg-zinc-950 p-1 rounded-lg shadow-2xl border-2 border-zinc-800">
           <div className="bg-zinc-900 rounded-lg overflow-hidden">
             {/* Header with Question Number, Timer, and Finish Button */}
-            <div className="bg-zinc-800 border-b border-zinc-700 px-6 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="bg-zinc-900 border-2 border-zinc-600 rounded px-4 py-1 font-bold text-lg text-white">
+            <div className="bg-zinc-800 border-b border-zinc-700 px-3 md:px-6 py-2 md:py-3 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
+              <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
+                <div className="bg-zinc-900 border-2 border-zinc-600 rounded px-3 md:px-4 py-1 font-bold text-base md:text-lg text-white">
                   {currentIndex + 1}
                 </div>
                 <div
-                  className={`bg-zinc-900 border-2 border-zinc-600 rounded px-4 py-1 font-mono font-bold text-lg ${timerColor}`}
+                  className={`bg-zinc-900 border-2 border-zinc-600 rounded px-3 md:px-4 py-1 font-mono font-bold text-base md:text-lg ${timerColor}`}
                 >
                   {formatTime(timeRemaining)}
                 </div>
               </div>
-              <Button onClick={handleSubmit} className="bg-red-600 hover:bg-red-700 text-white font-bold">
+              <Button
+                onClick={handleSubmit}
+                className="bg-red-600 hover:bg-red-700 text-white font-bold w-full md:w-auto text-sm md:text-base"
+              >
                 TERMINAR
               </Button>
             </div>
 
             {/* Question Content */}
-            <div className="p-6">
-              <div className="flex gap-6 mb-6">
+            <div className="p-3 md:p-6">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-6 mb-4 md:mb-6">
                 {/* Image on the left */}
                 {currentQuestion.imagePath && (
                   <div className="flex-shrink-0">
-                    <div className="w-48 h-32 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
+                    <div className="w-full md:w-48 h-32 md:h-32 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
                       <img
                         src={currentQuestion.imagePath || "/placeholder.svg"}
                         alt="Question"
@@ -211,11 +214,11 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 )}
 
                 <div className="flex-1">
-                  <p className="text-lg leading-relaxed text-white">{currentQuestion.text}</p>
+                  <p className="text-sm md:text-lg leading-relaxed text-white">{currentQuestion.text}</p>
                 </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-3">
                 {optionsArray.map((option) => {
                   const isSelected = userAnswer === option.letter
 
@@ -223,17 +226,17 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                     <button
                       key={option.letter}
                       onClick={() => handleAnswer(currentQuestion.id, option.letter)}
-                      className={`w-full flex items-center gap-4 p-4 border-2 rounded-lg transition-all ${
+                      className={`w-full flex items-center gap-3 md:gap-4 p-3 md:p-4 border-2 rounded-lg transition-all ${
                         isSelected
-                          ? "border-zinc-400 bg-zinc-700" // Darker/more loaded color when selected
+                          ? "border-zinc-400 bg-zinc-700"
                           : "border-zinc-700 bg-zinc-800 hover:border-zinc-600 hover:bg-zinc-750"
                       } cursor-pointer`}
                     >
                       {/* Option Letter Circle */}
                       <div
-                        className={`flex-shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-lg ${
+                        className={`flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center font-bold text-base ${
                           isSelected
-                            ? "border-zinc-300 bg-zinc-600 text-white" // Darker/more loaded when selected
+                            ? "border-zinc-300 bg-zinc-600 text-white"
                             : "border-zinc-600 bg-zinc-900 text-white"
                         }`}
                       >
@@ -242,7 +245,9 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
 
                       {/* Option Text */}
                       <div className="flex-1 text-left">
-                        <span className={`${isSelected ? "font-semibold" : ""} text-white`}>{option.text}</span>
+                        <span className={`text-xs md:text-base ${isSelected ? "font-semibold" : ""} text-white`}>
+                          {option.text}
+                        </span>
                       </div>
                     </button>
                   )
@@ -251,29 +256,32 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
             </div>
 
             {/* Navigation Footer */}
-            <div className="bg-zinc-800 border-t border-zinc-700 px-6 py-4 flex items-center justify-between">
+            <div className="bg-zinc-800 border-t border-zinc-700 px-3 md:px-6 py-3 md:py-4 flex flex-col md:flex-row items-center justify-between gap-3">
               <Button
                 onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
                 disabled={currentIndex === 0}
                 variant="outline"
-                className="border-zinc-600 text-white hover:bg-zinc-700"
+                className="border-zinc-600 text-white hover:bg-zinc-700 w-full md:w-auto text-sm md:text-base"
               >
                 ← Anterior
               </Button>
 
-              <div className="text-sm text-zinc-400">
+              <div className="text-xs md:text-sm text-zinc-400 text-center order-first md:order-none">
                 Questão {currentIndex + 1} de {questions.length} • Respondidas: {Object.keys(answers).length}
               </div>
 
               {isLastQuestion ? (
-                <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700 text-white font-bold">
+                <Button
+                  onClick={handleSubmit}
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold w-full md:w-auto text-sm md:text-base"
+                >
                   Terminar
                 </Button>
               ) : (
                 <Button
                   onClick={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
                   variant="outline"
-                  className="border-zinc-600 text-white hover:bg-zinc-700"
+                  className="border-zinc-600 text-white hover:bg-zinc-700 w-full md:w-auto text-sm md:text-base"
                 >
                   Próxima →
                 </Button>

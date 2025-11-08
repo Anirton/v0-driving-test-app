@@ -8,21 +8,15 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-id5qgK9SxLsQA1b6fDmR1r7LB9FrFY.png"
-                  alt="Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+        <div className="container mx-auto px-4 py-3 md:py-4">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="relative w-10 h-10 md:w-12 md:h-12">
+                <Image src="https://ibb.co/SDPq9Pyf" alt="Logo" fill className="object-contain" priority />
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-balance">Teste de Condução</h1>
-                <p className="text-xs text-muted-foreground">Preparação INATTER</p>
+              <div className="min-w-0">
+                <h1 className="text-base md:text-xl font-bold text-balance line-clamp-1">Teste de Condução</h1>
+                <p className="text-xs text-muted-foreground hidden sm:block">Preparação INATTER</p>
               </div>
             </div>
             <nav className="hidden md:flex items-center gap-4">
@@ -41,30 +35,37 @@ export default function HomePage() {
                 </Button>
               </Link>
             </nav>
+            <Link href="/free-test" className="md:hidden">
+              <Button size="sm" className="bg-green-600 hover:bg-green-700 text-xs">
+                Teste
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Video Section */}
-      <section className="container mx-auto px-4 py-8 pt-12">
+      <section className="container mx-auto px-4 py-6 md:py-8 pt-8 md:pt-12">
         <Card className="max-w-3xl mx-auto border-2 border-green-600/20 bg-gradient-to-br from-green-600/5 to-transparent">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Veja Como Funciona</CardTitle>
-            <CardDescription>Assista ao vídeo e descubra como passar no exame</CardDescription>
+          <CardHeader className="text-center p-4 md:p-6">
+            <CardTitle className="text-xl md:text-2xl">Veja Como Funciona</CardTitle>
+            <CardDescription className="text-sm md:text-base">
+              Assista ao vídeo e descubra como passar no exame
+            </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 p-4 md:p-6">
             <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
               <div className="text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center mx-auto">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-green-600 flex items-center justify-center mx-auto">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
-                <p className="text-sm text-muted-foreground">Vídeo de apresentação</p>
+                <p className="text-xs md:text-sm text-muted-foreground">Vídeo de apresentação</p>
               </div>
             </div>
             <div className="text-center">
-              <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
+              <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 w-full md:w-auto">
                 <Link href="/pricing">Começar Agora</Link>
               </Button>
             </div>
@@ -73,17 +74,21 @@ export default function HomePage() {
       </section>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-balance leading-tight">
+      <section className="container mx-auto px-4 py-8 md:py-20">
+        <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
+          <h2 className="text-3xl md:text-5xl font-bold text-balance leading-tight">
             Prepare-se para o Exame Teórico de Condução
           </h2>
-          <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
             Pratique com questões reais do INATTER. Simule o exame oficial e estude por categorias para garantir a sua
             aprovação.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button asChild size="lg" className="text-base bg-green-600 hover:bg-green-700">
+          <div className="flex flex-col gap-3 md:gap-4 justify-center pt-2 md:pt-4">
+            <Button
+              asChild
+              size="lg"
+              className="text-base bg-green-600 hover:bg-green-700 w-full md:w-auto md:inline-flex"
+            >
               <Link href="/free-test">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -91,11 +96,16 @@ export default function HomePage() {
                 Teste Grátis
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="text-base bg-transparent">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="text-base bg-transparent w-full md:w-auto md:inline-flex"
+            >
               <Link href="/pricing">Ver Planos</Link>
             </Button>
           </div>
-          <div className="pt-4">
+          <div className="pt-2 md:pt-4">
             <Link
               href="/how-it-works"
               className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
@@ -117,14 +127,16 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="container mx-auto px-4 py-12">
+      <section className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-2">Escolha Seu Plano</h3>
-            <p className="text-muted-foreground">Acesso ilimitado para estudar e passar no exame</p>
+          <div className="text-center mb-6 md:mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold mb-2">Escolha Seu Plano</h3>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Acesso ilimitado para estudar e passar no exame
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
             <Card className="border-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -284,7 +296,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/free-test">Começar Simulação</Link>
+                <Link href="/simulation">Começar Simulação</Link>
               </Button>
             </CardContent>
           </Card>
@@ -376,7 +388,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/free-test">Ver Marcadas</Link>
+                <Link href="/">Ver Marcadas</Link>
               </Button>
             </CardContent>
           </Card>
