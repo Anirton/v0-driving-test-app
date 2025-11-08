@@ -1,19 +1,43 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 export default function HomePage() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+  // </CHANGE>
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <header
+        className={`border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50 transition-transform duration-300 ${isScrolled ? "-translate-y-full" : "translate-y-0"}`}
+      >
         <div className="container mx-auto px-4 py-3 md:py-4">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="relative w-10 h-10 md:w-12 md:h-12">
-                <Image src="https://ibb.co/SDPq9Pyf" alt="Logo" fill className="object-contain" priority />
+                <Image
+                  src="/mozambique-flag.jpg"
+                  alt="Bandeira de Moçambique"
+                  fill
+                  className="object-contain rounded"
+                  priority
+                />
               </div>
+              {/* </CHANGE> */}
               <div className="min-w-0">
                 <h1 className="text-base md:text-xl font-bold text-balance line-clamp-1">Teste de Condução</h1>
                 <p className="text-xs text-muted-foreground hidden sm:block">Preparação INATTER</p>
@@ -47,6 +71,7 @@ export default function HomePage() {
           </div>
         </div>
       </header>
+      {/* </CHANGE> */}
 
       {/* Video Section */}
       <section className="container mx-auto px-4 py-6 md:py-8 pt-8 md:pt-12">
