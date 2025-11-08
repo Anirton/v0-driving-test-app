@@ -59,7 +59,7 @@ export default function PaymentPage() {
 
     const paymentMethodName = paymentMethod === "mpesa" ? "M-Pesa" : "e-Mola"
     const message = `Olá, quero pagar o plano ${currentPlan.name} (${currentPlan.price}) via ${paymentMethodName}. Meu número: ${phoneNumber}`
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=258843598240&text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.link/k71ms7`
     window.open(whatsappUrl, "_blank")
   }
 
