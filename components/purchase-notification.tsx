@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { X } from "lucide-react"
 
 const FIRST_NAMES = [
@@ -74,8 +75,12 @@ interface Notification {
 
 export function PurchaseNotification() {
   const [notifications, setNotifications] = useState<Notification[]>([])
+  const pathname = usePathname()
+  const shouldShowNotifications = !pathname?.startsWith("/free-test")
 
   useEffect(() => {
+    if (!shouldShowNotifications) return
+
     const addNotification = () => {
       const firstName = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)]
       const lastName = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)]
@@ -84,23 +89,21 @@ export function PurchaseNotification() {
 
       setNotifications((prev) => [...prev, { id, name }])
 
-      // Remove notification after 5 seconds
       setTimeout(() => {
         setNotifications((prev) => prev.filter((n) => n.id !== id))
       }, 5000)
     }
 
-    // Add first notification after 2 seconds
     const initialTimer = setTimeout(addNotification, 2000)
-
-    // Add new notification every 30 seconds
     const interval = setInterval(addNotification, 30000)
 
     return () => {
       clearTimeout(initialTimer)
       clearInterval(interval)
     }
-  }, [])
+  }, [shouldShowNotifications])
+
+  if (!shouldShowNotifications) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-40 space-y-3 pointer-events-none">
