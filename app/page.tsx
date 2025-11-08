@@ -12,7 +12,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative w-12 h-12">
-                <Image src="https://ibb.co/JwLw6fVw" alt="Logo" fill className="object-contain" priority />
+                <Image src="https://ibb.co/SDPq9Pyf" alt="Logo" fill className="object-contain" priority />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-balance">Teste de Condução</h1>
@@ -302,7 +302,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/practice">Praticar Agora</Link>
+                <Link href="/practice/categories">Praticar Agora</Link>
               </Button>
             </CardContent>
           </Card>
@@ -326,7 +326,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/results">Ver Resultados</Link>
+                <Link href="/results-protected">Ver Resultados</Link>
               </Button>
             </CardContent>
           </Card>
@@ -346,7 +346,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/review/wrong">Rever Erros</Link>
+                <Link href="/wrong-protected">Rever Erros</Link>
               </Button>
             </CardContent>
           </Card>
@@ -370,7 +370,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/review/marked">Ver Marcadas</Link>
+                <Link href="/">Ver Marcadas</Link>
               </Button>
             </CardContent>
           </Card>
@@ -391,7 +391,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/practice">Escolher Categoria</Link>
+                <Link href="/practice/categories">Escolher Categoria</Link>
               </Button>
             </CardContent>
           </Card>
