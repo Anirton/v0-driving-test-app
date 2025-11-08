@@ -2,6 +2,7 @@ import type { UserProgress, TestResult } from "./types"
 
 const STORAGE_KEY = "driving-test-progress"
 const FREE_TEST_ATTEMPTS_KEY = "free-test-attempts"
+const USED_EXAMS_KEY = "used-exams"
 
 export function getUserProgress(): UserProgress {
   if (typeof window === "undefined") {
@@ -84,6 +85,7 @@ export function saveTestResult(result: TestResult): void {
 export function clearAllProgress(): void {
   if (typeof window === "undefined") return
   localStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem(USED_EXAMS_KEY)
 }
 
 export function getFreeTestAttempts(): number {
