@@ -19,7 +19,8 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
   const [showInstructions, setShowInstructions] = useState(true)
   const [attemptsUsed, setAttemptsUsed] = useState(0)
   const [attemptsExceeded, setAttemptsExceeded] = useState(false)
-  const [timeElapsed, setTimeElapsed] = useState(0)
+  const [timeRemaining, setTimeRemaining] = useState(30 * 60) // 30 minutes in seconds
+  const [testEnded, setTestEnded] = useState(false)
 
   useEffect(() => {
     const attempts = getFreeTestAttempts()
@@ -30,13 +31,25 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
   }, [])
 
   useEffect(() => {
-    if (!showInstructions) {
+    if (!showInstructions && !testEnded && timeRemaining > 0) {
       const timer = setInterval(() => {
-        setTimeElapsed((prev) => prev + 1)
+        setTimeRemaining((prev) => {
+          if (prev <= 1) {
+            // Time's up - auto submit
+            return 0
+          }
+          return prev - 1
+        })
       }, 1000)
       return () => clearInterval(timer)
     }
-  }, [showInstructions])
+  }, [showInstructions, testEnded])
+
+  useEffect(() => {
+    if (timeRemaining === 0 && !showInstructions && !testEnded) {
+      handleSubmit()
+    }
+  }, [timeRemaining, showInstructions, testEnded])
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -49,6 +62,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
   }
 
   const handleSubmit = () => {
+    setTestEnded(true)
     incrementFreeTestAttempts()
     // Store results in sessionStorage to pass to results page
     const results = questions.map((q) => ({
@@ -111,8 +125,9 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
             <div className="space-y-2">
               <h3 className="font-semibold text-white">Instruções:</h3>
               <ul className="list-disc list-inside space-y-1 text-zinc-400">
-                <li>10 questões de múltipla escolha</li>
-                <li>Sem limite de tempo</li>
+                <li>25 questões de múltipla escolha</li>
+                <li>Tempo limite: 30 minutos</li>
+                <li>O teste terminará automaticamente quando o tempo acabar</li>
                 <li>Responda todas as questões</li>
                 <li>Clique em TERMINAR para ver os resultados</li>
               </ul>
@@ -145,12 +160,17 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
   const currentQuestion = questions[currentIndex]
   const userAnswer = answers[currentQuestion.id]
 
-  const optionsArray = [
-    { letter: "A" as const, text: currentQuestion.options.A },
-    { letter: "B" as const, text: currentQuestion.options.B },
-    { letter: "C" as const, text: currentQuestion.options.C },
-    { letter: "D" as const, text: currentQuestion.options.D },
-  ]
+  const optionsArray = (
+    [
+      { letter: "A" as const, text: currentQuestion.options.A },
+      { letter: "B" as const, text: currentQuestion.options.B },
+      { letter: "C" as const, text: currentQuestion.options.C },
+      { letter: "D" as const, text: currentQuestion.options.D },
+    ] as const
+  ).filter((option) => option.text && option.text.trim() !== "")
+
+  const isLastQuestion = currentIndex === questions.length - 1
+  const timerColor = timeRemaining < 300 ? "text-red-500" : "text-white"
 
   return (
     <div className="min-h-screen bg-zinc-900 py-8">
@@ -163,15 +183,13 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 <div className="bg-zinc-900 border-2 border-zinc-600 rounded px-4 py-1 font-bold text-lg text-white">
                   {currentIndex + 1}
                 </div>
-                <div className="bg-zinc-900 border-2 border-zinc-600 rounded px-4 py-1 font-mono font-bold text-lg text-white">
-                  {formatTime(timeElapsed)}
+                <div
+                  className={`bg-zinc-900 border-2 border-zinc-600 rounded px-4 py-1 font-mono font-bold text-lg ${timerColor}`}
+                >
+                  {formatTime(timeRemaining)}
                 </div>
               </div>
-              <Button
-                onClick={handleSubmit}
-                disabled={Object.keys(answers).length !== questions.length}
-                className="bg-red-600 hover:bg-red-700 text-white font-bold"
-              >
+              <Button onClick={handleSubmit} className="bg-red-600 hover:bg-red-700 text-white font-bold">
                 TERMINAR
               </Button>
             </div>
@@ -207,7 +225,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                       onClick={() => handleAnswer(currentQuestion.id, option.letter)}
                       className={`w-full flex items-center gap-4 p-4 border-2 rounded-lg transition-all ${
                         isSelected
-                          ? "border-zinc-500 bg-zinc-800"
+                          ? "border-zinc-400 bg-zinc-700" // Darker/more loaded color when selected
                           : "border-zinc-700 bg-zinc-800 hover:border-zinc-600 hover:bg-zinc-750"
                       } cursor-pointer`}
                     >
@@ -215,7 +233,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                       <div
                         className={`flex-shrink-0 w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-lg ${
                           isSelected
-                            ? "border-zinc-500 bg-zinc-700 text-white"
+                            ? "border-zinc-300 bg-zinc-600 text-white" // Darker/more loaded when selected
                             : "border-zinc-600 bg-zinc-900 text-white"
                         }`}
                       >
@@ -224,7 +242,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
 
                       {/* Option Text */}
                       <div className="flex-1 text-left">
-                        <span className="text-white">{option.text}</span>
+                        <span className={`${isSelected ? "font-semibold" : ""} text-white`}>{option.text}</span>
                       </div>
                     </button>
                   )
@@ -247,14 +265,19 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 Questão {currentIndex + 1} de {questions.length} • Respondidas: {Object.keys(answers).length}
               </div>
 
-              <Button
-                onClick={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
-                disabled={currentIndex === questions.length - 1}
-                variant="outline"
-                className="border-zinc-600 text-white hover:bg-zinc-700"
-              >
-                Próxima →
-              </Button>
+              {isLastQuestion ? (
+                <Button onClick={handleSubmit} className="bg-green-600 hover:bg-green-700 text-white font-bold">
+                  Terminar
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
+                  variant="outline"
+                  className="border-zinc-600 text-white hover:bg-zinc-700"
+                >
+                  Próxima →
+                </Button>
+              )}
             </div>
           </div>
         </div>
