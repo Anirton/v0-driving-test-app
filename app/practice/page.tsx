@@ -3,9 +3,10 @@ import { Card } from "@/components/ui/card"
 import { CategoryBadge } from "@/components/category-badge"
 import { categoryNames } from "@/lib/constants"
 import type { QuestionCategory } from "@/lib/types"
+import { getQuestionsByCategory } from "@/lib/questions-db"
 import Link from "next/link"
 
-export default async function PracticePage() {
+export default function PracticePage() {
   const categories: QuestionCategory[] = [
     "traffic-signs",
     "priority-rules",
@@ -17,11 +18,7 @@ export default async function PracticePage() {
 
   const categoryCounts: Record<string, number> = {}
   for (const category of categories) {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/questions/category/${category}`,
-      { cache: "force-cache" },
-    )
-    const questions = await response.json()
+    const questions = getQuestionsByCategory(category)
     categoryCounts[category] = questions.length
   }
 
