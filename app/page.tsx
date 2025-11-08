@@ -30,13 +30,17 @@ export default function HomePage() {
                 Preços
               </Link>
               <Link href="/free-test">
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="bg-yellow-400 hover:bg-yellow-400 text-foreground border-yellow-400"
+                >
                   Teste Grátis
                 </Button>
               </Link>
             </nav>
             <Link href="/free-test" className="md:hidden">
-              <Button size="sm" className="bg-green-600 hover:bg-green-700 text-xs">
+              <Button size="sm" className="bg-yellow-400 hover:bg-yellow-400 text-foreground text-xs">
                 Teste
               </Button>
             </Link>
@@ -87,7 +91,7 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
-              className="text-base bg-green-600 hover:bg-green-700 w-full md:w-auto md:inline-flex"
+              className="text-base bg-yellow-400 hover:bg-yellow-400 text-foreground w-full md:w-auto md:inline-flex"
             >
               <Link href="/free-test">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
