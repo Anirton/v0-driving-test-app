@@ -1,27 +1,10 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import FreeTestExam from "@/components/free-test-exam"
-import { getRandomExam, markExamAsCompleted } from "@/lib/exam-manager"
+import { getRandomExam, getShuffledExamQuestions } from "@/lib/exam-pool"
 
 export default function FreeTestPage() {
-  const [exam, setExam] = useState<{ id: string; number: number; questions: any[] } | null>(null)
+  // Get a random exam and shuffle its questions
+  const randomExam = getRandomExam()
+  const questions = getShuffledExamQuestions(randomExam.id, 25)
 
-  useEffect(() => {
-    // Get random exam on client side
-    const selectedExam = getRandomExam()
-    setExam(selectedExam)
-    // Mark exam as completed
-    markExamAsCompleted(selectedExam.id)
-  }, [])
-
-  if (!exam) {
-    return (
-      <div className="min-h-screen bg-zinc-900 flex items-center justify-center">
-        <div className="text-white text-xl">A carregar exame...</div>
-      </div>
-    )
-  }
-
-  return <FreeTestExam questions={exam.questions} examNumber={exam.number} />
+  return <FreeTestExam questions={questions} />
 }
