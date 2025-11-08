@@ -12,7 +12,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 md:gap-3">
               <div className="relative w-10 h-10 md:w-12 md:h-12">
-                <Image src="https://i.ibb.co/YBJMPmh/image.png" alt="Logo" fill className="object-contain" priority />
+                <Image src="https://ibb.co/SDPq9Pyf" alt="Logo" fill className="object-contain" priority />
               </div>
               <div className="min-w-0">
                 <h1 className="text-base md:text-xl font-bold text-balance line-clamp-1">Teste de Condução</h1>
@@ -33,14 +33,14 @@ export default function HomePage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="bg-yellow-400 hover:bg-yellow-400 text-foreground border-yellow-400"
+                  className="bg-yellow-400 hover:bg-yellow-400 border-yellow-400 text-black"
                 >
                   Teste Grátis
                 </Button>
               </Link>
             </nav>
             <Link href="/free-test" className="md:hidden">
-              <Button size="sm" className="bg-yellow-400 hover:bg-yellow-400 text-foreground text-xs">
+              <Button size="sm" className="bg-yellow-400 hover:bg-yellow-400 text-black text-xs">
                 Teste
               </Button>
             </Link>
@@ -91,7 +91,7 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
-              className="text-base bg-yellow-400 hover:bg-yellow-400 text-foreground w-full md:w-auto md:inline-flex"
+              className="text-base bg-yellow-400 hover:bg-yellow-400 text-black w-full md:w-auto md:inline-flex"
             >
               <Link href="/free-test">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

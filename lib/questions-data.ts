@@ -408,5 +408,3 @@ export const questionsData: Question[] = [
       "A pressão dos pneus deve ser verificada regularmente para garantir segurança e eficiência do veículo.",
   },
 ]
-
-export { questionsByCategory } from "./questions-db"

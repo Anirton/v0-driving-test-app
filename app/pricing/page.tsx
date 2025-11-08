@@ -125,7 +125,11 @@ export default function PricingPage() {
             Não tem certeza? Experimente nosso teste grátis primeiro
           </p>
           <Link href="/free-test">
-            <Button variant="outline" size="lg" className="w-full md:w-auto bg-transparent">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-400 border-yellow-400 text-black"
+            >
               Fazer Teste Grátis
             </Button>
           </Link>

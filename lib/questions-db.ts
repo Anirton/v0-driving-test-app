@@ -28,12 +28,3 @@ export const categoryNames: Record<QuestionCategory, string> = {
   "general-rules": "Regras Gerais",
   safety: "Segurança",
 }
-
-export const questionsByCategory: Record<QuestionCategory, Question[]> = {
-  "traffic-signs": getQuestionsByCategory("traffic-signs"),
-  "priority-rules": getQuestionsByCategory("priority-rules"),
-  "speed-limits": getQuestionsByCategory("speed-limits"),
-  infractions: getQuestionsByCategory("infractions"),
-  "general-rules": getQuestionsByCategory("general-rules"),
-  safety: getQuestionsByCategory("safety"),
-}
