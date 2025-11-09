@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
+import Image from "next/image"
 import type { Question } from "@/lib/types"
 
 interface QuestionResult {
@@ -86,6 +87,19 @@ export default function FreeTestResultsPage() {
                     {index + 1}
                   </div>
                   <div className="flex-1">
+                    {!result.isCorrect && result.question.imagePath && (
+                      <div className="mb-3">
+                        <div className="relative w-full max-w-md h-48 bg-zinc-800 border-2 border-zinc-700 rounded overflow-hidden">
+                          <Image
+                            src={result.question.imagePath || "/placeholder.svg"}
+                            alt="Imagem da questão"
+                            fill
+                            className="object-contain"
+                            sizes="(max-width: 768px) 100vw, 448px"
+                          />
+                        </div>
+                      </div>
+                    )}
                     <p className="text-white font-medium mb-2">{result.question.text}</p>
                     <div className="space-y-1 text-sm">
                       <p className="text-zinc-400">

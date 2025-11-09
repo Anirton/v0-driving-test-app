@@ -182,7 +182,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
               key={q.id}
               src={q.imagePath || "/placeholder.svg"}
               alt=""
-              width={300}
+              width={400}
               height={300}
               priority={idx < 5}
               loading={idx < 5 ? "eager" : "lazy"}
@@ -219,14 +219,15 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
               <div className="flex flex-col md:flex-row gap-3 md:gap-6 mb-4 md:mb-6">
                 {currentQuestion.imagePath && (
                   <div className="flex-shrink-0">
-                    <div className="relative w-full md:w-48 h-32 md:h-32 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
+                    <div className="relative w-full md:w-56 h-40 md:h-40 bg-zinc-800 border-4 border-zinc-700 rounded overflow-hidden">
                       <Image
                         src={currentQuestion.imagePath || "/placeholder.svg"}
                         alt="Question image"
                         fill
                         className="object-cover"
                         priority
-                        sizes="(max-width: 768px) 100vw, 192px"
+                        sizes="(max-width: 768px) 100vw, 224px"
+                        quality={90}
                       />
                     </div>
                   </div>

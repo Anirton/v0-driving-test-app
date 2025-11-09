@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showVideoCTA, setShowVideoCTA] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,8 +46,13 @@ export default function HomePage() {
       }, 3000)
     }
 
+    const ctaTimer = setTimeout(() => {
+      setShowVideoCTA(true)
+    }, 60000) // 60 seconds = 1 minute
+
     return () => {
       document.body.removeChild(script)
+      clearTimeout(ctaTimer)
     }
   }, [])
 
@@ -68,7 +74,6 @@ export default function HomePage() {
                   priority
                 />
               </div>
-              {/* </CHANGE> */}
               <div className="min-w-0">
                 <h1 className="text-base md:text-xl font-bold text-balance line-clamp-1">Teste de Condução</h1>
                 <p className="text-xs text-muted-foreground hidden sm:block">Preparação INATTER</p>
@@ -102,7 +107,6 @@ export default function HomePage() {
           </div>
         </div>
       </header>
-      {/* </CHANGE> */}
 
       {/* Video Section */}
       <section className="container mx-auto px-4 py-6 md:py-8 pt-8 md:pt-12">
@@ -123,7 +127,6 @@ export default function HomePage() {
                   className="wistia_embed wistia_async_ril5ozivno"
                   style={{ height: "100%", position: "relative", width: "100%" }}
                 >
-                  {/* </CHANGE> */}
                   <div
                     className="wistia_swatch"
                     style={{
@@ -147,12 +150,28 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            {/* </CHANGE> */}
-            <div className="text-center">
-              <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 w-full md:w-auto">
-                <Link href="/pricing">Começar Agora</Link>
-              </Button>
-            </div>
+            {showVideoCTA && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 w-full">
+                  <Link href="/pricing">Comprar Agora</Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="w-full bg-yellow-400 hover:bg-yellow-400 border-yellow-400 text-black"
+                >
+                  <Link href="/free-test">Fazer Teste Grátis</Link>
+                </Button>
+              </div>
+            )}
+            {!showVideoCTA && (
+              <div className="text-center">
+                <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 w-full md:w-auto">
+                  <Link href="/pricing">Começar Agora</Link>
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
       </section>
@@ -230,7 +249,6 @@ export default function HomePage() {
                   Plano Semanal
                 </CardTitle>
                 <div className="flex items-baseline gap-2 pt-2">
-                  {/* Updated price for weekly plan */}
                   <span className="text-3xl font-bold">199 MT</span>
                   <span className="text-muted-foreground">/semana</span>
                 </div>
@@ -297,7 +315,6 @@ export default function HomePage() {
                   Plano Mensal
                 </CardTitle>
                 <div className="flex items-baseline gap-2 pt-2">
-                  {/* Updated price for monthly plan */}
                   <span className="text-3xl font-bold">350 MT</span>
                   <span className="text-muted-foreground">/mês</span>
                 </div>
