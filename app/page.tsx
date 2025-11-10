@@ -240,18 +240,26 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
-            <Card className="border-2">
+          <div className="max-w-md mx-auto mb-6 md:mb-8">
+            <Card className="border-2 border-green-600 relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                Mais Popular
+              </div>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <svg className="h-5 w-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                    />
                   </svg>
-                  Plano Semanal
+                  Plano Mensal
                 </CardTitle>
                 <div className="flex items-baseline gap-2 pt-2">
-                  <span className="text-3xl font-bold">199 MT</span>
-                  <span className="text-muted-foreground">/semana</span>
+                  <span className="text-3xl font-bold">300 MT</span>
+                  <span className="text-muted-foreground">/mês</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -292,49 +300,6 @@ export default function HomePage() {
                     </svg>
                     <span>30 questões reais</span>
                   </li>
-                </ul>
-                <Link href="/payment?plan=weekly">
-                  <Button className="w-full">Começar Agora</Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-green-600 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-medium">
-                Mais Popular
-              </div>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                    />
-                  </svg>
-                  Plano Mensal
-                </CardTitle>
-                <div className="flex items-baseline gap-2 pt-2">
-                  <span className="text-3xl font-bold">350 MT</span>
-                  <span className="text-muted-foreground">/mês</span>
-                </div>
-                <p className="text-sm text-green-600 font-medium">Economize 26%</p>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 mb-4">
-                  <li className="flex items-start gap-2 text-sm">
-                    <svg
-                      className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle cx="12" cy="12" r="10" strokeWidth={2} />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
-                    </svg>
-                    <span>Tudo do Plano Semanal</span>
-                  </li>
                   <li className="flex items-start gap-2 text-sm">
                     <svg
                       className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0"
@@ -365,12 +330,6 @@ export default function HomePage() {
                 </Link>
               </CardContent>
             </Card>
-          </div>
-
-          <div className="text-center">
-            <Link href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">
-              Ver todos os detalhes dos planos →
-            </Link>
           </div>
         </div>
       </section>
