@@ -26,24 +26,23 @@ export default function HomePage() {
     document.body.appendChild(script)
 
     script.onload = () => {
-      setTimeout(() => {
-        if (window._wq) {
-          window._wq.push({
-            id: "ril5ozivno",
-            options: {
-              autoPlay: true,
-              controlsVisibleOnLoad: false,
-              playbar: false,
-              playButton: true,
-              smallPlayButton: false,
-              volumeControl: false,
-              fullscreenButton: false,
-              settingsControl: false,
-              qualityControl: false,
-            },
-          })
-        }
-      }, 3000)
+      if (window._wq) {
+        window._wq.push({
+          id: "ril5ozivno",
+          options: {
+            autoPlay: false,
+            controlsVisibleOnLoad: true,
+            playbar: false, // Disable progress bar
+            playButton: true,
+            smallPlayButton: false,
+            volumeControl: false,
+            fullscreenButton: false,
+            settingsControl: false,
+            qualityControl: false,
+            playbackRateControl: false,
+          },
+        })
+      }
     }
 
     const ctaTimer = setTimeout(() => {
@@ -51,7 +50,9 @@ export default function HomePage() {
     }, 60000) // 60 seconds = 1 minute
 
     return () => {
-      document.body.removeChild(script)
+      if (document.body.contains(script)) {
+        document.body.removeChild(script)
+      }
       clearTimeout(ctaTimer)
     }
   }, [])
