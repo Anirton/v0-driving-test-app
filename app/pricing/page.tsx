@@ -77,11 +77,11 @@ export default function PricingPage() {
               </li>
             </ul>
 
-            <Link href="/payment?plan=monthly" className="block">
+            <a href="https://wa.link/k71ms7" target="_blank" rel="noopener noreferrer" className="block">
               <Button className="w-full bg-green-600 hover:bg-green-700" size="lg">
                 Começar Agora
               </Button>
-            </Link>
+            </a>
           </Card>
         </div>
 

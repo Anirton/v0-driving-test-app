@@ -206,7 +206,9 @@ export default function HomePage() {
               variant="outline"
               className="text-base bg-transparent w-full md:w-auto md:inline-flex"
             >
-              <Link href="/pricing">Ver Planos</Link>
+              <a href="https://wa.link/k71ms7" target="_blank" rel="noopener noreferrer">
+                Ver Planos
+              </a>
             </Button>
           </div>
           <div className="pt-2 md:pt-4">
@@ -325,9 +327,9 @@ export default function HomePage() {
                     <span className="font-medium">Estatísticas avançadas</span>
                   </li>
                 </ul>
-                <Link href="/payment?plan=monthly">
+                <a href="https://wa.link/k71ms7" target="_blank" rel="noopener noreferrer">
                   <Button className="w-full bg-green-600 hover:bg-green-700">Começar Agora</Button>
-                </Link>
+                </a>
               </CardContent>
             </Card>
           </div>
