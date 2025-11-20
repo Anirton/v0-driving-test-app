@@ -1,7 +1,6 @@
 import type { UserProgress, TestResult } from "./types"
 
 const STORAGE_KEY = "driving-test-progress"
-const FREE_TEST_ATTEMPTS_KEY = "free-test-attempts"
 const USED_EXAMS_KEY = "used-exams"
 
 export function getUserProgress(): UserProgress {
@@ -89,20 +88,11 @@ export function clearAllProgress(): void {
 }
 
 export function getFreeTestAttempts(): number {
-  if (typeof window === "undefined") return 0
-  const stored = localStorage.getItem(FREE_TEST_ATTEMPTS_KEY)
-  return stored ? Number.parseInt(stored, 10) : 0
+  // Always return 0 since tests are now unlimited
+  return 0
 }
 
 export function incrementFreeTestAttempts(): number {
-  if (typeof window === "undefined") return 0
-  const current = getFreeTestAttempts()
-  const newCount = current + 1
-  localStorage.setItem(FREE_TEST_ATTEMPTS_KEY, newCount.toString())
-  return newCount
-}
-
-export function resetFreeTestAttempts(): void {
-  if (typeof window === "undefined") return
-  localStorage.removeItem(FREE_TEST_ATTEMPTS_KEY)
+  // No-op function since tests are unlimited
+  return 0
 }

@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 import type { Question } from "@/lib/types"
 import Link from "next/link"
 import Image from "next/image"
-import { getFreeTestAttempts, incrementFreeTestAttempts } from "@/lib/storage"
+import { incrementFreeTestAttempts } from "@/lib/storage"
 
 interface FreeTestExamProps {
   questions: Question[]
@@ -18,18 +18,8 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, "A" | "B" | "C" | "D">>({})
   const [showInstructions, setShowInstructions] = useState(true)
-  const [attemptsUsed, setAttemptsUsed] = useState(0)
-  const [attemptsExceeded, setAttemptsExceeded] = useState(false)
   const [timeRemaining, setTimeRemaining] = useState(30 * 60) // 30 minutes in seconds
   const [testEnded, setTestEnded] = useState(false)
-
-  useEffect(() => {
-    const attempts = getFreeTestAttempts()
-    setAttemptsUsed(attempts)
-    if (attempts >= 3) {
-      setAttemptsExceeded(true)
-    }
-  }, [])
 
   useEffect(() => {
     if (!showInstructions && !testEnded && timeRemaining > 0) {
@@ -75,28 +65,6 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
     router.push("/free-test/results")
   }
 
-  if (attemptsExceeded) {
-    return (
-      <div className="min-h-screen bg-zinc-900 flex items-center justify-center p-4">
-        <Card className="max-w-2xl w-full p-8 text-center bg-zinc-950 border-zinc-800">
-          <svg className="h-16 w-16 text-zinc-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-          <h1 className="text-3xl font-bold mb-4 text-white">Testes Grátis Esgotados</h1>
-          <p className="text-lg text-zinc-400 mb-8">
-            Você já usou seus 3 testes grátis. Para continuar praticando, escolha um dos nossos planos!
-          </p>
-          <Link href="/pricing">
-            <Button className="bg-green-600 hover:bg-green-700" size="lg">
-              Ver Planos
-            </Button>
-          </Link>
-        </Card>
-      </div>
-    )
-  }
-
   if (showInstructions) {
     return (
       <div className="min-h-screen bg-zinc-900 flex items-center justify-center p-4">
@@ -104,25 +72,6 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
           <h1 className="text-3xl font-bold mb-6 text-center text-white">Teste Grátis</h1>
 
           <div className="space-y-4 mb-8">
-            <div className="flex items-start gap-3 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
-              <svg
-                className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-              <div>
-                <p className="font-medium text-blue-300">Testes Restantes: {3 - attemptsUsed} de 3</p>
-                <p className="text-sm text-blue-400">
-                  Após usar todos os testes grátis, você precisará escolher um plano para continuar.
-                </p>
-              </div>
-            </div>
-
             <div className="space-y-2">
               <h3 className="font-semibold text-white">Instruções:</h3>
               <ul className="list-disc list-inside space-y-1 text-zinc-400">
@@ -131,6 +80,7 @@ export default function FreeTestExam({ questions }: FreeTestExamProps) {
                 <li>O teste terminará automaticamente quando o tempo acabar</li>
                 <li>Responda todas as questões</li>
                 <li>Clique em TERMINAR para ver os resultados</li>
+                <li>Você pode fazer quantos testes quiser - ilimitados!</li>
               </ul>
             </div>
           </div>
